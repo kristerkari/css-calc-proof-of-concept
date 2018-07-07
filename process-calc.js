@@ -1,5 +1,5 @@
 import { Dimensions } from "react-native";
-import { doCalc } from "./doCalc";
+import { transform } from "./css-calc-transform";
 const win = Dimensions.get("window");
 const CALC_REG = /\bcalc\(([\s\S]+)\)/;
 
@@ -32,7 +32,7 @@ export const process = (styles, ref) => {
   for (const key in styles) {
     const value = styles[key];
     if (CALC_REG.test(value)) {
-      styles[key] = doCalc({
+      styles[key] = transform({
         prop: key,
         value,
         win: {
