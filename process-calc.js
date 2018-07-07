@@ -29,10 +29,12 @@ export const process = (styles, ref) => {
     };
   }
 
+  const newStyles = {};
+
   for (const key in styles) {
     const value = styles[key];
     if (CALC_REG.test(value)) {
-      styles[key] = transform({
+      newStyles[key] = transform({
         prop: key,
         value,
         win: {
@@ -44,8 +46,10 @@ export const process = (styles, ref) => {
           height: measurements[ref].height
         }
       });
+    } else {
+      newStyles[key] = styles[key];
     }
   }
 
-  return styles;
+  return newStyles;
 };
