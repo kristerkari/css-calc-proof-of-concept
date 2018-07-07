@@ -4,15 +4,22 @@ const win = Dimensions.get("window");
 const CALC_REG = /\bcalc\(([\s\S]+)\)/;
 
 const measurements = {};
+let _refs;
+
+export const setRefs = refs => {
+  _refs = refs;
+};
 
 export const measure = (ref, _this) => {
   return function(event) {
-    if (measurements[ref] && measurements[ref].width && [ref].height) {
+    if (measurements[ref]) {
       return;
     }
     var { width, height } = event.nativeEvent.layout;
     measurements[ref] = { width, height };
-    _this.forceUpdate();
+    if (_refs && Object.keys(measurements).length === _refs.length) {
+      _this.forceUpdate();
+    }
   };
 };
 
