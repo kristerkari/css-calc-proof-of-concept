@@ -1,5 +1,5 @@
 import { Dimensions } from "react-native";
-import { transform } from "./css-calc-transform";
+import { transform } from "css-calc-transform";
 const win = Dimensions.get("window");
 const CALC_REG = /\bcalc\(([\s\S]+)\)/;
 
